@@ -12,6 +12,13 @@ class PointTransaction extends Model
     // Bảng point_transactions chỉ có created_at, không có updated_at
     const UPDATED_AT = null;
 
+    // Lịch sử điểm chỉ được ghi thêm: không sửa, không xóa
+    protected static function booted(): void
+    {
+        static::updating(fn () => throw new \LogicException('Lịch sử điểm chỉ được ghi thêm, không được sửa.'));
+        static::deleting(fn () => throw new \LogicException('Lịch sử điểm không được xóa.'));
+    }
+
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);

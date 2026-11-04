@@ -281,7 +281,7 @@ CREATE TABLE `point_transactions` (
         FOREIGN KEY (`reference_transaction_id`)
         REFERENCES `crm_transactions` (`id`)
         ON UPDATE CASCADE
-        ON DELETE SET NULL,
+        ON DELETE RESTRICT,
     CONSTRAINT `fk_point_transactions_created_by`
         FOREIGN KEY (`created_by`)
         REFERENCES `users` (`id`)
